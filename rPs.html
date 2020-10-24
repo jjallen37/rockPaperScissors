@@ -44,6 +44,7 @@ function getValidInput(){
     return input;
 }
 
+// keep score for five rounds
 function game(){
     let pScore = 0;
     let cScore = 0;
@@ -62,9 +63,13 @@ function game(){
         console.log(`The Computer played ${cMove}.\n ${winner}\n
                     Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
     }
+
+    return (pScore>cScore)? alert("You are the winner!") : alert("You're a loser!");
 }
 
 
+
+//PLA
 
 /* TESTS
 
