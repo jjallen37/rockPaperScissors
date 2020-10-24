@@ -8,12 +8,12 @@ function computerPlay(){
 }
 //play rock paper scissors: compare player's move with computer's move and declare winner
 function playRound(playerSelection, computerSelection){
-    let pS=playerSelection.toLowerCase();
-    if(pS===computerSelection){
+    console.log(`The Computer chose ${computerSelection}.`);
+    if(playerSelection===computerSelection){
         return "You tied. Try again."
-    } else if(pS=="rock"){
+    } else if(playerSlection=="rock"){
         return (computerSelection==="scissors")? "You win! Rock beats Scissors." : "You lose! Paper beats Rock.";
-    } else if(pS==="paper"){
+    } else if(playerSelection==="paper"){
         return (computerSelection==="rock")? "You win! Paper beats Rock." : "You lose! Scissors beats Paper.";
     } else{
         return (computerSelection==="paper")? "You win! Scissors beats Paper." : "You lose! Rock beats Scissors.";
@@ -45,9 +45,21 @@ function getValidInput(){
     return input;
 }
 
-//PLAY GAME
-console.log(playRound(getValidInput(), computerPlay()));
+function game(){
+    let pScore = 0;
+    let cScore = 0;
+    
+    for(i=1; i<=5; i++){
+        let pMove = getValidInput();
+        let cMove = computerPlay();
+        let winner=playRound(pMove, cMove);
 
+        (winner.search("win")===-1)? cScore++ : pScore++;
+
+        console.log(`The computer played ${cMove}.\n ${winner}\n
+                    Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
+    }
+}
 
 /* TESTS
 
