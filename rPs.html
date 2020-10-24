@@ -45,10 +45,7 @@ function getValidInput(){
 }
 
 // keep score for five rounds
-function game(){
-    let pScore = 0;
-    let cScore = 0;
-    
+function game(){    
     for(i=1; i<=5; i++){
         let pMove = getValidInput();
         let cMove = computerPlay();
@@ -64,17 +61,47 @@ function game(){
                     Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
     }
 }
-
+//show final score from game()
 function result(){
     return (pScore>cScore)? alert("You are the winner!") :(pScore===cScore)? alert("Well, that was strange.") : alert("You're a loser!");
 }
 
+//ask to play again
+function playAgain(){
+    let answerIsInvalid=true;
+    let answer;
+    while(answerIsInvalid){
+        answer = prompt("Play again?").toLowerCase();
+        let response=validateYesNo(answer);
+        if(response==="Let's play!"){
+            answerisInvalid=false;
+            game();
+        }else if(response==="Well, fine then."){
+            answerIsInvalid=false;
+        }
+       alert(response);
+    }
+}
 
-
-
+//validate yes/no for playAgain()
+function validateYesNo(answer){
+    if(answer===""){
+        return "You did not answer me.";
+    }else if(answer==="no"){
+        return"Well, fine then.";
+    }else if(answer==="yes"){
+        return "Let's play!"
+    }else{
+        return 'I do not recognize that answer. Please choose "yes" or "no".'
+    }
+}
 
 //PLAY GAME
+let pScore = 0;
+let cScore = 0;
 game();
+result();
+playAgain();
 
 /* TESTS
 
