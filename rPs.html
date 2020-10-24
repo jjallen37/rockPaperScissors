@@ -1,14 +1,12 @@
 <script>
 
 //FUNCTIONS
-
 //get computer's move
 function computerPlay(){
     let choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
-
-//get player's move
+//play rock paper scissors: compare player's move with computer's move and declare winner
 function playRound(playerSelection, computerSelection){
     let pS=playerSelection.toLowerCase();
     if(pS===computerSelection){
@@ -21,7 +19,7 @@ function playRound(playerSelection, computerSelection){
         return (computerSelection==="paper")? "You win! Scissors beats Paper." : "You lose! Rock beats Scissors.";
     }
 }
-
+//confirm player's text input is rock, paper or scissors
 function validateInput(input){
     if (input===""){
         return "Please make a choice.";
@@ -31,17 +29,40 @@ function validateInput(input){
         return "valid";
     }
 }
+// get player's move + confirm is valid; if not valid, explain why and prompt again.
+function getValidInput(){
+    let inputIsInvalid=true;
+    let input;
+    while(inputIsInvalid){
+        input=prompt("Rock, paper or scissors?").toLowerCase();
+        let output=validateInput(input);
+        if (output !== "valid"){
+            alert(output);
+        } else {
+            inputIsInvalid=false;
+        }
+    }
+    return input;
+}
+
+//PLAY GAME
+console.log(playRound(getValidInput(), computerPlay()));
+
 
 /* TESTS
 
-test playRound:
+test playRound():
 const playerSelection = "SciSSors";
 const computerSelection = computerPlay();
 console.log(`The computer chose ${computerSelection}.`);
 console.log(playRound(playerSelection, computerSelection));
 
+test validateInput():
 let input = prompt("Rock, paper or scissors?").toLowerCase();
 console.log(validateInput(input));
+
+test getValidInput()
+console.log(getValidInput());
 */
 
 </script>
