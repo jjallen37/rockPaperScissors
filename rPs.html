@@ -1,0 +1,58 @@
+<script>
+
+//FUNCTIONS
+
+//get computer's move
+function computerPlay(){
+    let choices = ["rock", "paper", "scissors"];
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+
+//get player's move
+function playRound(playerSelection, computerSelection){
+    let pS=playerSelection.toLowerCase();
+    if(pS===computerSelection){
+        return "You tied. Try again."
+    } else if(pS=="rock"){
+        return (computerSelection==="scissors")? "You win! Rock beats Scissors." : "You lose! Paper beats Rock.";
+    } else if(pS==="paper"){
+        return (computerSelection==="rock")? "You win! Paper beats Rock." : "You lose! Scissors beats Paper.";
+    } else{
+        return (computerSelection==="paper")? "You win! Scissors beats Paper." : "You lose! Rock beats Scissors.";
+    }
+}
+
+function checkInput(input){
+    console.log(input);
+    if (input===""){
+        return alert("Please make a choice."); 
+        
+    } else if ( (input !== "rock") && (input !=="paper") && (input !=="scissors") ) { 
+        return alert('You may only choose "rock", "paper" or "scissors".');
+    } else {
+        return alert("TBD");
+    }
+}
+
+
+/* TESTS
+
+test playRound:
+const playerSelection = "SciSSors";
+const computerSelection = computerPlay();
+console.log(`The computer chose ${computerSelection}.`);
+console.log(playRound(playerSelection, computerSelection));
+
+test checkInput:
+let input = prompt("Rock, paper or scissors?").toLowerCase();
+checkInput(input);
+
+*/
+
+
+
+
+
+
+
+</script>
