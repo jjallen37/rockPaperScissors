@@ -63,13 +63,18 @@ function game(){
         console.log(`The Computer played ${cMove}.\n ${winner}\n
                     Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
     }
+}
 
-    return (pScore>cScore)? alert("You are the winner!") : alert("You're a loser!");
+function result(){
+    return (pScore>cScore)? alert("You are the winner!") :(pScore===cScore)? alert("Well, that was strange.") : alert("You're a loser!");
 }
 
 
 
-//PLA
+
+
+//PLAY GAME
+game();
 
 /* TESTS
 
