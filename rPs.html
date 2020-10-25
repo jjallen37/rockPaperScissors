@@ -67,20 +67,22 @@ function result(){
 }
 
 //ask to play again
-function playAgain(){
+function playAgainAnswer(){
     let answerIsInvalid=true;
     let answer;
     while(answerIsInvalid){
         answer = prompt("Play again?").toLowerCase();
         let response=validateYesNo(answer);
-        if(response==="Let's play!"){
-            answerisInvalid=false;
-            game();
-        }else if(response==="Well, fine then."){
+        if(response==="Well, fine then."){
             answerIsInvalid=false;
+            answer=false;
+        }else if(response==="Let's play!"){
+            answerIsInvalid=false;
+            answer=true;
         }
-       alert(response);
+        alert(response);
     }
+    return answer;
 }
 
 //validate yes/no for playAgain()
@@ -96,12 +98,26 @@ function validateYesNo(answer){
     }
 }
 
-//PLAY GAME
-let pScore = 0;
-let cScore = 0;
-game();
-result();
-playAgain();
+//PLAY
+function rockPaperScissors(){
+    pScore=0;
+    cScore=0;
+    let play = true;
+    while(play){
+        game();
+        result();
+        let again=playAgainAnswer();
+        if(!again){
+         play=false;
+        }else{
+            cScore=0;
+            pScore=0;
+        }
+    } 
+}
+
+rockPaperScissors();
+
 
 /* TESTS
 
