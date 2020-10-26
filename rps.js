@@ -1,5 +1,3 @@
-<script>
-
 //FUNCTIONS
 //get computer's move
 function computerPlay(){
@@ -135,4 +133,3 @@ test getValidInput()
 console.log(getValidInput());
 */
 
-</script>
