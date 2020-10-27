@@ -1,10 +1,22 @@
 //FUNCTIONS
-//get computer's move
+
+/**
+ * Get computer's move
+ * 
+ * @return {String} The computer's move
+ */
 function computerPlay() {
     let choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
-//play rock paper scissors: compare player's move with computer's move and declare winner
+
+/**
+ * Play rock paper scissors: compare player's move with computer's move and declare winner
+ *
+ * @param {String} playerSelection Rock, paper, or scissors
+ * @param {String} computerSelection Rock, paper, or scissors
+ * @return {String} The message to display victory
+ */
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return "You tied. Try again."
@@ -16,7 +28,13 @@ function playRound(playerSelection, computerSelection) {
         return (computerSelection === "paper") ? "You win! Scissors beats paper." : "You lose! Rock beats scissors.";
     }
 }
-//confirm player's text input is rock, paper or scissors
+
+/**
+ * Confirm player's text input is rock, paper or scissors
+ *
+ * @param {String} input The text inputed by the user for thier move
+ * @return {String}  The response to the user, or "valid" when the input is valid
+ */
 function validateInput(input) {
     if (input === "") {
         return "Please make a choice.";
@@ -26,7 +44,12 @@ function validateInput(input) {
         return "valid";
     }
 }
-// get player's move + confirm is valid; if not valid, explain why and prompt again.
+
+/**
+ * Get player's move + confirm is valid; if not valid, explain why and prompt again.
+ *
+ * @return {String} The user's valid input. "rock", "paper", or "scissors"
+ */
 function getValidInput() {
     let inputIsInvalid = true;
     let input;
@@ -42,7 +65,9 @@ function getValidInput() {
     return input;
 }
 
-// keep score for five rounds
+/**
+ * Keep score for five rounds
+ */
 function game() {
     for (i = 1; i <= 5; i++) {
         let pMove = getValidInput();
@@ -59,12 +84,21 @@ function game() {
                     Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
     }
 }
-//show final score from game()
+
+//
+/**
+ * Show final score from game()
+ * @return {void} Returns the result of alert, which is null. TODO refactor this because it doesn't actually return anything
+ */
 function result() {
     return (pScore > cScore) ? alert("You are the winner!") : (pScore === cScore) ? alert("Well, that was strange.") : alert("You're a loser!");
 }
 
-//ask to play again
+/**
+ * Ask to play again
+ *
+ * @return {boolean} Returns true if the user wants to play again, false if not
+ */
 function playAgainAnswer() {
     let answerIsInvalid = true;
     let answer;
@@ -83,7 +117,12 @@ function playAgainAnswer() {
     return answer;
 }
 
-//validate yes/no for playAgain()
+/**
+ * Validate yes/no for playAgain()
+ * 
+ * @param {String} answer The user's answer to "Do you want to play again?"
+ * @return {*}  
+ */
 function validateYesNo(answer) {
     if (answer === "") {
         return "You did not answer me.";
@@ -96,7 +135,9 @@ function validateYesNo(answer) {
     }
 }
 
-//PLAY
+/**
+ * PLAY
+ */
 function rockPaperScissors() {
     pScore = 0;
     cScore = 0;
@@ -115,7 +156,6 @@ function rockPaperScissors() {
 }
 
 rockPaperScissors();
-
 
 /* TESTS
 
