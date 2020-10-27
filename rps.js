@@ -28,15 +28,20 @@ function game() {
         // Get move from both players
         let pMove = getPlayerMove();
         let cMove = getComputerMove();
-        let winner = playRound(pMove, cMove);
+        let result = playRound(pMove, cMove);
+        var msg;
 
-        if (winner.search("win") >= 0) {
+        if (result === "win") {
             pScore++;
-        } else if (winner.search("lose") >= 0) {
+            msg = `You win! ${pMove} beats ${cMove}.`;
+        } else if (result === "lose") {
             cScore++
+            msg = `You lose! ${cMove} beats ${pMove}.`;
+        } else {
+            msg = "You tied. Try again.";
         }
 
-        console.log(`The Computer played ${cMove}.\n ${winner}\n
+        console.log(`The Computer played ${cMove}.\n ${msg}\n
                     Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
     }
 }
@@ -74,19 +79,19 @@ function getComputerMove() {
 /**
  * Play rock paper scissors: compare player's move with computer's move and declare winner
  *
- * @param {String} playerSelection Rock, paper, or scissors
- * @param {String} computerSelection Rock, paper, or scissors
- * @return {String} The message to display victory
+ * @param {String} playerSelection rock, paper, or scissors
+ * @param {String} computerSelection rock, paper, or scissors
+ * @return {String} The result: either win, lose, tie
  */
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return "You tied. Try again."
+        return "tie"
     } else if (playerSelection == "rock") {
-        return (computerSelection === "scissors") ? "You win! Rock beats scissors." : "You lose! Paper beats rock.";
+        return (computerSelection === "scissors") ? "win" : "lose";
     } else if (playerSelection === "paper") {
-        return (computerSelection === "rock") ? "You win! Paper beats rock." : "You lose! Scissors beats paper.";
+        return (computerSelection === "rock") ? "win" : "lose";
     } else {
-        return (computerSelection === "paper") ? "You win! Scissors beats paper." : "You lose! Rock beats scissors.";
+        return (computerSelection === "paper") ? "win" : "lose";
     }
 }
 
