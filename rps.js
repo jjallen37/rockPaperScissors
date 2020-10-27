@@ -100,18 +100,18 @@ function result() {
  * @return {boolean} Returns true if the user wants to play again, false if not
  */
 function playAgainAnswer() {
-    let answerIsInvalid = true;
+    let answerIsValid = false;
     let answer;
-    while (answerIsInvalid) {
+    while (!answerIsValid) {
         answer = prompt("Play again?").toLowerCase();
         let response = validateYesNo(answer);
         if (response === "Well, fine then.") {
-            answerIsInvalid = false;
+            answerIsValid = true;
             answer = false;
         } else if (response === "Let's play!") {
-            answerIsInvalid = false;
+            answerIsValid = true;
             answer = true;
-        }
+        } // else answer is not valid
         alert(response);
     }
     return answer;
@@ -141,16 +141,16 @@ function validateYesNo(answer) {
 function rockPaperScissors() {
     pScore = 0;
     cScore = 0;
-    let play = true;
-    while (play) {
+    let isPlayAgain = true;
+    while (isPlayAgain) {
         game();
         result();
-        let again = playAgainAnswer();
-        if (!again) {
-            play = false;
-        } else {
+        let userWantsToPlayAgain = playAgainAnswer();
+        if (userWantsToPlayAgain) {
             cScore = 0;
             pScore = 0;
+        } else {
+            isPlayAgain = false;
         }
     }
 }
