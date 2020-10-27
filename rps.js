@@ -50,7 +50,7 @@ function getPlayerMove() {
     let inputIsInvalid = true;
     let input;
     while (inputIsInvalid) {
-        input = prompt("Rock, paper or scissors?").toLowerCase();
+        input = prompt("Rock, paper or scissors?")?.toLowerCase();
         let output = validateInput(input);
         if (output !== "valid") {
             alert(output);
@@ -106,7 +106,7 @@ function playAgainAnswer() {
     let answerIsValid = false;
     let answer;
     while (!answerIsValid) {
-        answer = prompt("Play again?").toLowerCase();
+        answer = prompt("Play again?")?.toLowerCase();
         let response = validateYesNo(answer);
         if (response === "Well, fine then.") {
             answerIsValid = true;
@@ -127,7 +127,7 @@ function playAgainAnswer() {
  * @return {String} The response to the user, or "valid" when the input is valid
  */
 function validateInput(input) {
-    if (input === "") {
+    if (!input) {
         return "Please make a choice.";
     } else if ((input !== "rock") && (input !== "paper") && (input !== "scissors")) {
         return 'You can only choose "rock", "paper", or "scissors".';
@@ -144,7 +144,7 @@ function validateInput(input) {
  * @return {*}  
  */
 function validateYesNo(answer) {
-    if (answer === "") {
+    if (!answer) {
         return "You did not answer me.";
     } else if (answer === "no") {
         return "Well, fine then.";
