@@ -5,7 +5,7 @@
  * 
  * @return {String} The computer's move
  */
-function computerPlay() {
+function getComputerMove() {
     let choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -33,7 +33,7 @@ function playRound(playerSelection, computerSelection) {
  * Confirm player's text input is rock, paper or scissors
  *
  * @param {String} input The text inputed by the user for thier move
- * @return {String}  The response to the user, or "valid" when the input is valid
+ * @return {String} The response to the user, or "valid" when the input is valid
  */
 function validateInput(input) {
     if (input === "") {
@@ -50,7 +50,7 @@ function validateInput(input) {
  *
  * @return {String} The user's valid input. "rock", "paper", or "scissors"
  */
-function getValidInput() {
+function getPlayerMove() {
     let inputIsInvalid = true;
     let input;
     while (inputIsInvalid) {
@@ -70,8 +70,9 @@ function getValidInput() {
  */
 function game() {
     for (i = 1; i <= 5; i++) {
-        let pMove = getValidInput();
-        let cMove = computerPlay();
+        // Get move from both players
+        let pMove = getPlayerMove();
+        let cMove = getComputerMove();
         let winner = playRound(pMove, cMove);
 
         if (winner.search("win") >= 0) {
