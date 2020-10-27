@@ -91,10 +91,15 @@ function playRound(playerSelection, computerSelection) {
 }
 
 /**
- * Show final score from game()
+ * Show user game result.
  */
 function showResult() {
-    (pScore > cScore) ? alert("You are the winner!") : (pScore === cScore) ? alert("Well, that was strange.") : alert("You're a loser!");
+    var msg;
+    // Lots of different ways to write this one, I just think this looks cleaner
+    if (pScore > cScore) { msg = "You are the winner!"; }
+    else if (pScore === cScore) { msg = "Well, that was strange."; }
+    else { msg = "You're a loser!"; }
+    alert(msg);
 }
 
 /**
