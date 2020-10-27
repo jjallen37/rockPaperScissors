@@ -1,4 +1,65 @@
-//FUNCTIONS
+// FUNCTIONS
+
+/**
+ * PLAY
+ */
+function rockPaperScissors() {
+    pScore = 0;
+    cScore = 0;
+    let isPlayAgain = true;
+    while (isPlayAgain) {
+        game();
+        showResult();
+        let userWantsToPlayAgain = playAgainAnswer();
+        if (userWantsToPlayAgain) {
+            cScore = 0;
+            pScore = 0;
+        } else {
+            isPlayAgain = false;
+        }
+    }
+}
+
+/**
+ * Keep score for five rounds
+ */
+function game() {
+    for (i = 1; i <= 5; i++) {
+        // Get move from both players
+        let pMove = getPlayerMove();
+        let cMove = getComputerMove();
+        let winner = playRound(pMove, cMove);
+
+        if (winner.search("win") >= 0) {
+            pScore++;
+        } else if (winner.search("lose") >= 0) {
+            cScore++
+        }
+
+        console.log(`The Computer played ${cMove}.\n ${winner}\n
+                    Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
+    }
+}
+
+/**
+ * Get player's move + confirm is valid; if not valid, explain why and prompt again.
+ *
+ * @return {String} The user's valid input. "rock", "paper", or "scissors"
+ */
+function getPlayerMove() {
+    let inputIsInvalid = true;
+    let input;
+    while (inputIsInvalid) {
+        input = prompt("Rock, paper or scissors?").toLowerCase();
+        let output = validateInput(input);
+        if (output !== "valid") {
+            alert(output);
+        } else {
+            inputIsInvalid = false;
+        }
+    }
+    return input;
+}
 
 /**
  * Get computer's move
@@ -26,63 +87,6 @@ function playRound(playerSelection, computerSelection) {
         return (computerSelection === "rock") ? "You win! Paper beats rock." : "You lose! Scissors beats paper.";
     } else {
         return (computerSelection === "paper") ? "You win! Scissors beats paper." : "You lose! Rock beats scissors.";
-    }
-}
-
-/**
- * Confirm player's text input is rock, paper or scissors
- *
- * @param {String} input The text inputed by the user for thier move
- * @return {String} The response to the user, or "valid" when the input is valid
- */
-function validateInput(input) {
-    if (input === "") {
-        return "Please make a choice.";
-    } else if ((input !== "rock") && (input !== "paper") && (input !== "scissors")) {
-        return 'You can only choose "rock", "paper", or "scissors".';
-    } else {
-        return "valid";
-    }
-}
-
-/**
- * Get player's move + confirm is valid; if not valid, explain why and prompt again.
- *
- * @return {String} The user's valid input. "rock", "paper", or "scissors"
- */
-function getPlayerMove() {
-    let inputIsInvalid = true;
-    let input;
-    while (inputIsInvalid) {
-        input = prompt("Rock, paper or scissors?").toLowerCase();
-        let output = validateInput(input);
-        if (output !== "valid") {
-            alert(output);
-        } else {
-            inputIsInvalid = false;
-        }
-    }
-    return input;
-}
-
-/**
- * Keep score for five rounds
- */
-function game() {
-    for (i = 1; i <= 5; i++) {
-        // Get move from both players
-        let pMove = getPlayerMove();
-        let cMove = getComputerMove();
-        let winner = playRound(pMove, cMove);
-
-        if (winner.search("win") >= 0) {
-            pScore++;
-        } else if (winner.search("lose") >= 0) {
-            cScore++
-        }
-
-        console.log(`The Computer played ${cMove}.\n ${winner}\n
-                    Round: ${i}   Your Score: ${pScore}   Computer: ${cScore}`)
     }
 }
 
@@ -117,6 +121,23 @@ function playAgainAnswer() {
 }
 
 /**
+ * Confirm player's text input is rock, paper or scissors
+ *
+ * @param {String} input The text inputed by the user for thier move
+ * @return {String} The response to the user, or "valid" when the input is valid
+ */
+function validateInput(input) {
+    if (input === "") {
+        return "Please make a choice.";
+    } else if ((input !== "rock") && (input !== "paper") && (input !== "scissors")) {
+        return 'You can only choose "rock", "paper", or "scissors".';
+    } else {
+        return "valid";
+    }
+}
+
+
+/**
  * Validate yes/no for playAgain()
  * 
  * @param {String} answer The user's answer to "Do you want to play again?"
@@ -134,29 +155,12 @@ function validateYesNo(answer) {
     }
 }
 
-/**
- * PLAY
- */
-function rockPaperScissors() {
-    pScore = 0;
-    cScore = 0;
-    let isPlayAgain = true;
-    while (isPlayAgain) {
-        game();
-        showResult();
-        let userWantsToPlayAgain = playAgainAnswer();
-        if (userWantsToPlayAgain) {
-            cScore = 0;
-            pScore = 0;
-        } else {
-            isPlayAgain = false;
-        }
-    }
-}
+////// EXECUTION ///////
 
 rockPaperScissors();
 
-/* TESTS
+/* 
+// TESTS (we'll do more here later maybe)
 
 test playRound():
 const playerSelection = "SciSSors";
