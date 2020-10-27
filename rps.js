@@ -86,13 +86,11 @@ function game() {
     }
 }
 
-//
 /**
  * Show final score from game()
- * @return {void} Returns the result of alert, which is null. TODO refactor this because it doesn't actually return anything
  */
-function result() {
-    return (pScore > cScore) ? alert("You are the winner!") : (pScore === cScore) ? alert("Well, that was strange.") : alert("You're a loser!");
+function showResult() {
+    (pScore > cScore) ? alert("You are the winner!") : (pScore === cScore) ? alert("Well, that was strange.") : alert("You're a loser!");
 }
 
 /**
@@ -145,7 +143,7 @@ function rockPaperScissors() {
     let isPlayAgain = true;
     while (isPlayAgain) {
         game();
-        result();
+        showResult();
         let userWantsToPlayAgain = playAgainAnswer();
         if (userWantsToPlayAgain) {
             cScore = 0;
