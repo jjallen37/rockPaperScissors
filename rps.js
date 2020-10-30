@@ -6,6 +6,13 @@ const RESULT = {
     TIE: 'tie'
 }
 
+const RPS = {
+    ROCK: 'rock',
+    PAPER: 'paper',
+    SCISSORS: 'scissors',
+    INVALID: 'invalid'
+}
+
 /**
  * PLAY
  */
@@ -63,18 +70,23 @@ function game() {
  * @return {String} The user's valid input. "rock", "paper", or "scissors"
  */
 function getPlayerMove() {
-    let inputIsInvalid = true;
-    let input;
-    while (inputIsInvalid) {
-        input = prompt("Rock, paper or scissors?")?.toLowerCase();
-        let output = validateInput(input);
-        if (output !== "valid") {
-            alert(output);
-        } else {
-            inputIsInvalid = false;
+    while (true) {
+        var input = prompt("Rock, paper or scissors?");
+        let rps = parseRpsString(input);
+        switch (rps) {
+            case RPS.INVALID:
+                alert("Invalid response")
+                break;
+            case null:
+            case undefined:
+            case "":
+                alert("Please enter a response")
+                break;
+            // For valid rps responses
+            default:
+                return rps;
         }
     }
-    return input;
 }
 
 /**
@@ -142,21 +154,20 @@ function playAgainAnswer() {
 }
 
 /**
- * Confirm player's text input is rock, paper or scissors
+ * Parse a string to an RPS enum
  *
- * @param {String} input The text inputed by the user for thier move
- * @return {String} The response to the user, or "valid" when the input is valid
+ * @param {String} input A potential rps string answer
+ * @return {String} An RPS enum
  */
-function validateInput(input) {
-    if (!input) {
-        return "Please make a choice.";
-    } else if ((input !== "rock") && (input !== "paper") && (input !== "scissors")) {
-        return 'You can only choose "rock", "paper", or "scissors".';
-    } else {
-        return "valid";
+function parseRpsString(input) {
+    if (!input) { return null; }
+    switch (input.toLowerCase()) {
+        case RPS.ROCK: return RPS.ROCK;
+        case RPS.PAPER: return RPS.PAPER;
+        case RPS.SCISSORS: return RPS.SCISSORS;
+        default: return RPS.INVALID;
     }
 }
-
 
 /**
  * Validate yes/no for playAgain()
@@ -176,24 +187,30 @@ function validateYesNo(answer) {
     }
 }
 
+// TESTS (we'll do more here later maybe)
+/**
+ * Prints a failed statement if failed,
+ * Prints a success 
+ */
+function testParseRps() {
+    // assertTrue(parseRpsString("ROCK"), RPS.ROCK)
+    if (parseRpsString("ROCK") != RPS.ROCK) {
+        console.log("FAILED 1");
+        return;
+    }
+    if (parseRpsString("sCiSsOrS") != RPS.SCISSORS) {
+        console.log("FAILED 2");
+        return;
+    }
+    if (parseRpsString("asfd") != RPS.INVALID) {
+        console.log("FAILED 3");
+        return;
+    }
+    console.log("PASSED testParseRps");
+}
+
+testParseRps();
+
 ////// EXECUTION ///////
 
 rockPaperScissors();
-
-
-/* 
-// TESTS (we'll do more here later maybe)
-
-test playRound():
-const playerSelection = "SciSSors";
-const computerSelection = computerPlay();
-console.log(`The computer chose ${computerSelection}.`);
-console.log(playRound(playerSelection, computerSelection));
-
-test validateInput():
-let input = prompt("Rock, paper or scissors?").toLowerCase();
-console.log(validateInput(input));
-
-test getValidInput()
-console.log(getValidInput());
-*/
