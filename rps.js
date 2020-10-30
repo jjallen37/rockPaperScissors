@@ -19,6 +19,13 @@ const YESNO = {
     INVALID: 'invalid'
 }
 
+const TEXT = {
+    lets_play: "Let's play!",
+    user_no_play: "Well fine then.",
+    invalid_yes_no: "I showed you my rps, pls respond.",
+    null_yes_no: "You did not answer me >:F"
+}
+
 /**
  * PLAY
  */
@@ -30,11 +37,11 @@ function rockPaperScissors() {
         showResult();
         let isPlayAgain = playAgainAnswer();
         if (isPlayAgain) {
-            alert("Lets play!")
+            alert(lets_play)
             cScore = 0;
             pScore = 0;
         } else {
-            alert("Well fine then")
+            alert(user_no_play)
             break;
         }
     }
@@ -148,18 +155,17 @@ function playAgainAnswer() {
         let yn = parseYesNoString(input);
         switch (yn) {
             case YESNO.INVALID:
-                alert("I showed you my rps, pls respond.")
+                alert(null_yes_no)
                 break;
             case YESNO.YES:
                 return true;
             case YESNO.NO:
                 return false;
-            // For valid rps responses
             case null:
             case undefined:
             case "":
             default:
-                alert("You did not answer me >:(")
+                alert(null_yes_no)
                 break;
         }
     }
@@ -174,8 +180,8 @@ function playAgainAnswer() {
 function parseRpsString(input) {
     if (!input) { return null; }
     switch (input.toLowerCase()) {
-        case RPS.ROCK: 
-        case 'r': 
+        case RPS.ROCK:
+        case 'r':
             return RPS.ROCK;
         case RPS.PAPER: return RPS.PAPER;
         case RPS.SCISSORS: return RPS.SCISSORS;
@@ -192,11 +198,11 @@ function parseRpsString(input) {
 function parseYesNoString(input) {
     if (!input) { return null; }
     switch (input.toLowerCase()) {
-        case YESNO.YES: 
-        case 'y': 
+        case YESNO.YES:
+        case 'y':
             return YESNO.YES;
-        case YESNO.NO: 
-        case 'n': 
+        case YESNO.NO:
+        case 'n':
             return YESNO.NO;
         default: return YESNO.INVALID;
     }
