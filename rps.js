@@ -13,22 +13,29 @@ const RPS = {
     INVALID: 'invalid'
 }
 
+const YESNO = {
+    YES: 'yes',
+    NO: 'no',
+    INVALID: 'invalid'
+}
+
 /**
  * PLAY
  */
 function rockPaperScissors() {
     pScore = 0;
     cScore = 0;
-    let isPlayAgain = true;
-    while (isPlayAgain) {
+    while (true) {
         game();
         showResult();
-        let userWantsToPlayAgain = playAgainAnswer();
-        if (userWantsToPlayAgain) {
+        let isPlayAgain = playAgainAnswer();
+        if (isPlayAgain) {
+            alert("Lets play!")
             cScore = 0;
             pScore = 0;
         } else {
-            isPlayAgain = false;
+            alert("Well fine then")
+            break;
         }
     }
 }
@@ -136,21 +143,26 @@ function showResult() {
  * @return {boolean} Returns true if the user wants to play again, false if not
  */
 function playAgainAnswer() {
-    let answerIsValid = false;
-    let answer;
-    while (!answerIsValid) {
-        answer = prompt("Play again?")?.toLowerCase();
-        let response = validateYesNo(answer);
-        if (response === "Well, fine then.") {
-            answerIsValid = true;
-            answer = false;
-        } else if (response === "Let's play!") {
-            answerIsValid = true;
-            answer = true;
-        } // else answer is not valid
-        alert(response);
+    while (true) {
+        var input = prompt("Play again?");
+        let yn = parseYesNoString(input);
+        switch (yn) {
+            case YESNO.INVALID:
+                alert("I showed you my rps, pls respond.")
+                break;
+            case YESNO.YES:
+                return true;
+            case YESNO.NO:
+                return false;
+            // For valid rps responses
+            case null:
+            case undefined:
+            case "":
+            default:
+                alert("You did not answer me >:(")
+                break;
+        }
     }
-    return answer;
 }
 
 /**
@@ -162,7 +174,9 @@ function playAgainAnswer() {
 function parseRpsString(input) {
     if (!input) { return null; }
     switch (input.toLowerCase()) {
-        case RPS.ROCK: return RPS.ROCK;
+        case RPS.ROCK: 
+        case 'r': 
+            return RPS.ROCK;
         case RPS.PAPER: return RPS.PAPER;
         case RPS.SCISSORS: return RPS.SCISSORS;
         default: return RPS.INVALID;
@@ -170,20 +184,21 @@ function parseRpsString(input) {
 }
 
 /**
- * Validate yes/no for playAgain()
- * 
- * @param {String} answer The user's answer to "Do you want to play again?"
- * @return {*}  
+ * Parse a string to an YESNO enum
+ *
+ * @param {String} input A potential yes/no string answer
+ * @return {String} An YESNO enum
  */
-function validateYesNo(answer) {
-    if (!answer) {
-        return "You did not answer me.";
-    } else if (answer === "no") {
-        return "Well, fine then.";
-    } else if (answer === "yes") {
-        return "Let's play!"
-    } else {
-        return 'I do not recognize that answer. Please choose "yes" or "no".'
+function parseYesNoString(input) {
+    if (!input) { return null; }
+    switch (input.toLowerCase()) {
+        case YESNO.YES: 
+        case 'y': 
+            return YESNO.YES;
+        case YESNO.NO: 
+        case 'n': 
+            return YESNO.NO;
+        default: return YESNO.INVALID;
     }
 }
 
@@ -206,7 +221,7 @@ function testParseRps() {
         console.log("FAILED 3");
         return;
     }
-    console.log("PASSED testParseRps");
+    console.log("testParseRps");
 }
 
 testParseRps();
