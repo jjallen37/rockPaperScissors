@@ -19,3 +19,11 @@ CTRL+SHIFT+P -> "Format Document"
 
 4. Naming 
 https://dev.to/michi/tips-on-naming-boolean-variables-cleaner-code-35ig
+
+
+....later in the lesson
+
+# ENUMS
+ - https://www.sohamkamani.com/blog/2017/08/21/enums-in-javascript/
+ - Not explicitly in js, but good enough
+ - WIN / LOSE / TIE

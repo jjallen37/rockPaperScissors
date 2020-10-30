@@ -1,5 +1,11 @@
 // FUNCTIONS
 
+const RESULT = {
+    WIN: 'win',
+    LOSE: 'lose',
+    TIE: 'tie'
+}
+
 /**
  * PLAY
  */
@@ -31,14 +37,19 @@ function game() {
         let result = playRound(pMove, cMove);
         var msg;
 
-        if (result === "win") {
-            pScore++;
-            msg = `You win! ${pMove} beats ${cMove}.`;
-        } else if (result === "lose") {
-            cScore++
-            msg = `You lose! ${cMove} beats ${pMove}.`;
-        } else {
-            msg = "You tied. Try again.";
+        switch (result) {
+            case RESULT.WIN:
+                pScore++;
+                msg = `You win! ${pMove} beats ${cMove}.`;
+                break;
+            case RESULT.LOSE:
+                cScore++
+                msg = `You lose! ${cMove} beats ${pMove}.`;
+                break;
+            case RESULT.TIE:
+            default:
+                msg = "You tied. Try again.";
+                break;
         }
 
         console.log(`The Computer played ${cMove}.\n ${msg}\n
@@ -85,13 +96,13 @@ function getComputerMove() {
  */
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return "tie"
+        return RESULT.TIE;
     } else if (playerSelection == "rock") {
-        return (computerSelection === "scissors") ? "win" : "lose";
+        return (computerSelection === "scissors") ? RESULT.WIN : RESULT.LOSE;
     } else if (playerSelection === "paper") {
-        return (computerSelection === "rock") ? "win" : "lose";
+        return (computerSelection === "rock") ? RESULT.WIN : RESULT.LOSE;
     } else {
-        return (computerSelection === "paper") ? "win" : "lose";
+        return (computerSelection === "paper") ? RESULT.WIN : RESULT.LOSE;
     }
 }
 
@@ -169,6 +180,7 @@ function validateYesNo(answer) {
 
 rockPaperScissors();
 
+
 /* 
 // TESTS (we'll do more here later maybe)
 
@@ -185,4 +197,3 @@ console.log(validateInput(input));
 test getValidInput()
 console.log(getValidInput());
 */
-
